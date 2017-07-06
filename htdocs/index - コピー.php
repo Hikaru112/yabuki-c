@@ -153,38 +153,9 @@ $cnt3a = json_encode($cnt3);
 html { width: 100%; height: 100%; }
 body { width: 100%; height: 100%; margin: 0; }
 #map { width: 100%; height: 91%; }
-
-div.form{
-        margin: 20px;
-      }
-      div.form span{
-        margin: 0 30px;
-      }
-      div.form input[type="text"]{
-        font-size: 18px;
-        padding: 5px 10px;
-      }
-      div.form input[type="button"]{
-        background-color: #2E2EFE;
-        border: 0;
-        padding: 8px 12px;
-        color: #fff;
-        margin-left: 20px;
-        outline: none;
-}
 </style>
 </head>
 <body>    
-<div class="form">
-        <label>出発地
-            <input type="text" id="from" value="東京駅">
-        </label>
-        <span>&rarr;</span>
-        <label>到着地
-            <input type="text" id="to" value="千葉工業大学">
-        </label>
-        <input type="button" id="btn" value="ルートを表示">
-</div>
 <div id="map"></div>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCh-xxyYmMWlyvZElHmfygXIbckJAcW-r8&"></script>
 
@@ -211,32 +182,11 @@ function successFunc( position )
                 var mapData    = { pos: { lat: 35.6833, lng: 140.0333 }};
                 var markerData = [];
                 
-                
-    document.getElementById("btn").onclick = function () {
-        var DS = new google.maps.DirectionsService();
-        var DR = new google.maps.DirectionsRenderer(); 
-                
-        DR.setMap(map);
-        /* 開始地点と目的地点、ルーティングの種類を設定  */
-        var from = document.getElementById('from').value;
-        var to = document.getElementById('to').value;
- 
-        var request = { 
-            origin: from, 
-            destination: to,
-            travelMode: google.maps.TravelMode.WALKING
-        }; 
-        DS.route(request, function(result, status) { 
-                DR.setDirections(result);
-        }); 
-    };
-
-                
         // 緯度
 	console.log( position.coords.latitude ) ;
 	// 経度
 	console.log( position.coords.longitude ) ;
-        markerData.push({ pos: { lat:position.coords.latitude, lng: position.coords.longitude }, title: "popup-title3", icon: "", infoWindowOpen: false, infoWindowContent: "<h3>AAAAA</h3><p>test</p>"  });
+        markerData.push({ pos: { lat:position.coords.latitude, lng: position.coords.longitude }, title: "popup-title3", icon: "", infoWindowOpen: true, infoWindowContent: "<h3>現在地</h3><p>現在地です</p>"  });
         
 
         
@@ -245,9 +195,6 @@ function successFunc( position )
         var lng = <?php echo $cnt2a; ?>;
         var name = <?php echo $cnt3a; ?>;
         var kazu = <?php echo $kazu; ?>;
-
-
-
 
        
        markerData.push({ pos: { lat: 40, lng: 150 }, title: "popup-title2", icon: "", infoWindowOpen: false, infoWindowContent: "<h3>tes</h3><p>piyopiyo</p>" });
@@ -262,8 +209,6 @@ function successFunc( position )
        document.write(name[i]);
        */
        }
-       
-       
        var map = new google.maps.Map(document.getElementById('map'), {
 		center: mapData.pos,
 		zoom:   15
