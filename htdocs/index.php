@@ -250,7 +250,7 @@ function successFunc( position )
 
 
        
-       markerData.push({ pos: { lat: 40, lng: 150 }, title: "popup-title2", icon: "", infoWindowOpen: false, infoWindowContent: "<h3>tes</h3><p>piyopiyo</p>" });
+       //markerData.push({ pos: { lat: 40, lng: 150 }, title: "popup-title2", icon: "", infoWindowOpen: false, infoWindowContent: "<h3>tes</h3><p>piyopiyo</p>" });
        for(var i = 0; i < kazu; i++) {
 //parseFlort文字列を数値に変換する
          markerData.push({ pos: { lat: parseFloat(lat[i]), lng: parseFloat(lng[i]) }, title: "popup-title2", icon: "", infoWindowOpen: false, infoWindowContent: name[i]  });
