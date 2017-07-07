@@ -174,7 +174,8 @@ div.form{
 }
 </style>
 </head>
-<body>    
+<body>
+
 <div class="form">
         <label>出発地
             <input type="text" id="from" value="東京駅">
@@ -186,9 +187,27 @@ div.form{
         <input type="button" id="btn" value="ルートを表示">
 </div>
 <div id="map"></div>
+
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCh-xxyYmMWlyvZElHmfygXIbckJAcW-r8&"></script>
 
 <script type="text/javascript">
+(function(){
+    "use strict";
+    // Geolocation APIに対応している
+    if( navigator.geolocation ){
+        // 現在位置を取得できる場合の処理
+	console.log( "あなたの端末では、現在位置を取得することができます。" ) ;
+    }
+    // Geolocation APIに対応していない
+    else {
+        // 現在位置を取得できない場合の処理
+	alert( "あなたの端末では、現在位置を取得できません。" ) ;
+    }
+    
+// 現在位置を取得する
+navigator.geolocation.getCurrentPosition( successFunc , errorFunc , optionObj ) ;
+
+// 成功した時の関数
 (function(){
     "use strict";
     // Geolocation APIに対応している
