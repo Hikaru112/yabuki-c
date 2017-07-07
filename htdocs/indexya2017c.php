@@ -177,7 +177,7 @@ div.form{
 <body>    
 <div class="form">
         <label>出発地
-            <input type="text" id="from" value="東京駅">
+            <input type="text" id="from" value="千葉県">
         </label>
         <span>&rarr;</span>
         <label>到着地
