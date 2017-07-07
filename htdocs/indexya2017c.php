@@ -154,13 +154,61 @@ $cnt3a = json_encode($cnt3);
 html { width: 100%; height: 100%; }
 body { width: 100%; height: 100%; margin: 0; }
 #map { width: 100%; height: 91%; }
+
+div.form{
+        margin: 20px;
+      }
+      div.form span{
+        margin: 0 30px;
+      }
+      div.form input[type="text"]{
+        font-size: 18px;
+        padding: 5px 10px;
+      }
+      div.form input[type="button"]{
+        background-color: #2E2EFE;
+        border: 0;
+        padding: 8px 12px;
+        color: #fff;
+        margin-left: 20px;
+        outline: none;
+}
 </style>
 </head>
-<body>    
-<div id="map"></div>
+<body>
+
+<div class="form">
+        <label>出発地
+            <input type="text" id="from" value="東京駅">
+        </label>
+        <span>&rarr;</span>
+        <label>到着地
+            <input type="text" id="to" value="千葉工業大学">
+        </label>
+        <input type="button" id="btn" value="ルートを表示">
+</div>
+<div id="map"></div>//mapの表示
+
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCh-xxyYmMWlyvZElHmfygXIbckJAcW-r8&"></script>
 
 <script type="text/javascript">
+(function(){
+    "use strict";
+    // Geolocation APIに対応している
+    if( navigator.geolocation ){
+        // 現在位置を取得できる場合の処理
+	console.log( "あなたの端末では、現在位置を取得することができます。" ) ;
+    }
+    // Geolocation APIに対応していない
+    else {
+        // 現在位置を取得できない場合の処理
+	alert( "あなたの端末では、現在位置を取得できません。" ) ;
+    }
+    
+// 現在位置を取得する
+navigator.geolocation.getCurrentPosition( successFunc , errorFunc , optionObj ) ;
+
+// 成功した時の関数
 (function(){
     "use strict";
     // Geolocation APIに対応している
@@ -183,6 +231,27 @@ function successFunc( position )
                 var mapData    = { pos: { lat: 35.6833, lng: 140.0333 }};
                 var markerData = [];
                 
+                
+    document.getElementById("btn").onclick = function () {
+        var DS = new google.maps.DirectionsService();
+        var DR = new google.maps.DirectionsRenderer(); 
+                
+        DR.setMap(map);
+        /* 開始地点と目的地点、ルーティングの種類を設定  */
+        var from = document.getElementById('from').value;
+        var to = document.getElementById('to').value;
+ 
+        var request = { 
+            origin: from, 
+            destination: to,
+            travelMode: google.maps.TravelMode.WALKING
+        }; 
+        DS.route(request, function(result, status) { 
+                DR.setDirections(result);
+        }); 
+    };
+
+                
         // 緯度
 	console.log( position.coords.latitude ) ;
 	// 経度
@@ -197,6 +266,9 @@ function successFunc( position )
         var name = <?php echo $cnt3a; ?>;
         var kazu = <?php echo $kazu; ?>;
 
+
+
+
        
        //markerData.push({ pos: { lat: 40, lng: 150 }, title: "popup-title2", icon: "", infoWindowOpen: false, infoWindowContent: "<h3>tes</h3><p>piyopiyo</p>" });
        for(var i = 0; i < kazu; i++) {
@@ -210,6 +282,8 @@ function successFunc( position )
        document.write(name[i]);
        */
        }
+       
+       
        var map = new google.maps.Map(document.getElementById('map'), {
 		center: mapData.pos,
 		zoom:   15
