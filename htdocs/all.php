@@ -17,6 +17,8 @@ $result = $prepare->fetchAll(PDO::FETCH_ASSOC);
 
 //結果の出力
 foreach ($result as $person) {
+  echo "<br/>ID:";
+  echo $person['ID'];//手抜き
   echo "<br/>避難所:";
   echo $person['避難所名'];//手抜き
   echo "<br/>緯度:";
