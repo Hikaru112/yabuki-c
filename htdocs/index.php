@@ -26,7 +26,7 @@ text-align: center;
 
 /* --- メニュー項目 --- */
 div.nav ul.nl li {
-width: 32.3%; /* タブの幅 */
+width: 49.0%; /* タブの幅 */
 margin-right: 1.0%; /* タブの右マージン */
 background: #f9f9f9  no-repeat left top; /* タブの背景（左） */
 float: left;
@@ -89,7 +89,6 @@ color: #ffffff; /* 見出しの文字色 */
 <div class="nav">
 
 <ul class="nl clearFix">
-<li><a href="hinan.html">TOP</a></li>
 <li class="active"><a href="index.php">マップ</a></li>
 <li><a href="twitter.html">災害情報</a></li>
 </ul>
