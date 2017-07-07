@@ -187,7 +187,7 @@ div.form{
         </label>
         <input type="button" id="btn" value="ルートを表示">
 </div>
-<div id="map"></div>//mapの表示
+<div id="map"></div>
 
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCh-xxyYmMWlyvZElHmfygXIbckJAcW-r8&"></script>
 
