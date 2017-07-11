@@ -26,7 +26,7 @@ text-align: center;
 
 /* --- メニュー項目 --- */
 div.nav ul.nl li {
-width: 49.0%; /* タブの幅 */
+width: 32.3%; /* タブの幅 */
 margin-right: 1.0%; /* タブの右マージン */
 background: #f9f9f9  no-repeat left top; /* タブの背景（左） */
 float: left;
@@ -89,6 +89,7 @@ color: #ffffff; /* 見出しの文字色 */
 <div class="nav">
 
 <ul class="nl clearFix">
+<li><a href="hinan.html">TOP</a></li>
 <li class="active"><a href="index.php">マップ</a></li>
 <li><a href="twitter.html">災害情報</a></li>
 </ul>
@@ -149,48 +150,16 @@ $cnt3a = json_encode($cnt3);
 <script type ="text/javascript"src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jqery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <style>
-html,body,#map {
-    height: 100%;
-}
-div.form{
-        margin: 20px;
-      }
-      div.form span{
-        margin: 0 30px;
-      }
-      div.form input[type="text"]{
-        font-size: 18px;
-        padding: 5px 10px;
-      }
-      div.form input[type="button"]{
-        background-color: #2E2EFE;
-        border: 0;
-        padding: 8px 12px;
-        color: #fff;
-        margin-left: 20px;
-        outline: none;
-}
+html { width: 100%; height: 100%; }
+body { width: 100%; height: 100%; margin: 0; }
+#map { width: 100%; height: 91%; }
 </style>
 </head>
 <body>    
-<div class="form">
-        <label>出発地
-            <input type="text" id="from" value="千葉県">
-        </label>
-        <span>&rarr;</span>
-        <label>到着地
-            <input type="text" id="to" value="千葉工業大学">
-        </label>
-        <input type="button" id="btn" value="ルートを表示">
-</div>
 <div id="map"></div>
-
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCh-xxyYmMWlyvZElHmfygXIbckJAcW-r8&?sensor=true"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCh-xxyYmMWlyvZElHmfygXIbckJAcW-r8&"></script>
 
 <script type="text/javascript">
-    
-
-    
 (function(){
     "use strict";
     // Geolocation APIに対応している
@@ -213,27 +182,6 @@ function successFunc( position )
                 var mapData    = { pos: { lat: 35.6833, lng: 140.0333 }};
                 var markerData = [];
                 
-                
-    document.getElementById("btn").onclick = function () {
-        var DS = new google.maps.DirectionsService();
-        var DR = new google.maps.DirectionsRenderer(); 
-                
-        DR.setMap(map);
-        /* 開始地点と目的地点、ルーティングの種類を設定  */
-        var from = document.getElementById('from').value;
-        var to = document.getElementById('to').value;
- 
-        var request = { 
-            origin: from, 
-            destination: to,
-            travelMode: google.maps.TravelMode.WALKING
-        }; 
-        DS.route(request, function(result, status) { 
-                DR.setDirections(result);
-        }); 
-    };
-
-                
         // 緯度
 	console.log( position.coords.latitude ) ;
 	// 経度
@@ -248,11 +196,8 @@ function successFunc( position )
         var name = <?php echo $cnt3a; ?>;
         var kazu = <?php echo $kazu; ?>;
 
-
-
-
        
-       //markerData.push({ pos: { lat: 40, lng: 150 }, title: "popup-title2", icon: "", infoWindowOpen: false, infoWindowContent: "<h3>tes</h3><p>piyopiyo</p>" });
+       markerData.push({ pos: { lat: 40, lng: 150 }, title: "popup-title2", icon: "", infoWindowOpen: false, infoWindowContent: "<h3>tes</h3><p>piyopiyo</p>" });
        for(var i = 0; i < kazu; i++) {
 //parseFlort文字列を数値に変換する
          markerData.push({ pos: { lat: parseFloat(lat[i]), lng: parseFloat(lng[i]) }, title: "popup-title2", icon: "", infoWindowOpen: false, infoWindowContent: name[i]  });
@@ -264,8 +209,6 @@ function successFunc( position )
        document.write(name[i]);
        */
        }
-       
-       
        var map = new google.maps.Map(document.getElementById('map'), {
 		center: mapData.pos,
 		zoom:   15
@@ -306,7 +249,7 @@ function errorFunc( error )
 		0: "原因不明のエラーが発生しました…。" ,
 		1: "位置情報の取得が許可されませんでした…。" ,
 		2: "電波状況などで位置情報が取得できませんでした…。" ,
-		3: "位置情報の取得に時間がかかり過ぎてタイムアウトしました…。" 
+		3: "位置情報の取得に時間がかかり過ぎてタイムアウトしました…。" ,
 	} ;
 	// エラーコードに合わせたエラー内容をアラート表示
 	alert( errorMessage[error.code] ) ;
@@ -315,7 +258,7 @@ function errorFunc( error )
 var optionObj = {
 	"enableHighAccuracy": false ,
 	"timeout": 8000 ,
-	"maximumAge": 5000} ;
+	"maximumAge": 5000 ,} ;
 }());
 </script>
 </body>
