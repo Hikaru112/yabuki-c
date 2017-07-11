@@ -89,6 +89,7 @@ color: #ffffff; /* 見出しの文字色 */
 <div class="nav">
 
 <ul class="nl clearFix">
+
 <li class="active"><a href="index.php">マップ</a></li>
 <li><a href="twitter.html">災害情報</a></li>
 </ul>
